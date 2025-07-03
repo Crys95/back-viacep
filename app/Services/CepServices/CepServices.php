@@ -29,7 +29,6 @@ class CepServices
 
         $dados = $response->json();
 
-
         return response()->json($dados);
     }
 }
