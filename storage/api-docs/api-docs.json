@@ -1,0 +1,51 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API VIACEP",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/cep/via-cep": {
+            "get": {
+                "tags": [
+                    "CEP"
+                ],
+                "summary": "consultar cep",
+                "description": "consultar cep",
+                "operationId": "e18c0c0a123cac216095c7a8b947b05c",
+                "parameters": [
+                    {
+                        "name": "cep",
+                        "in": "query",
+                        "description": "cep",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerToken": {
+                "type": "http",
+                "description": "Use 'Bearer' seguido do token, ex: Bearer {token}",
+                "in": "header",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "CEP",
+            "description": "CEP"
+        }
+    ]
+}
