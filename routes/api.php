@@ -14,10 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('', [function () {
-    return 'Teste versão: ' . app()->version();
-}]);
-
 Route::group(['middleware' => 'api'], function () {
     require_once __DIR__ . '/cep.php';
 });

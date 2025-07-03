@@ -14,6 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('', [function () {
-    return 'Teste versão: ' . app()->version();
-}]);
+// Route::get('', [function () {
+//     return 'Teste versão: ' . app()->version();
+// }]);
