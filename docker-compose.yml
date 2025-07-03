@@ -1,8 +1,8 @@
 version: "3.5"
 
 services:
-  streamer-back:
-   container_name: streamer-back
+  back-viavep:
+   container_name: back-viavep
    build: .
    ports:
     - "8000:8000"
@@ -10,8 +10,8 @@ services:
    depends_on:
     - db
    volumes:
-    - .:/app/streamer-back
-    - vendor-streamer-back:/app/streamer-back/vendor
+    - .:/app/back-viavep
+    - vendor-back-viavep:/app/back-viavep/vendor
    networks:
     - laravel
 
@@ -37,7 +37,7 @@ networks:
    driver: bridge
 
 volumes:
-  vendor-streamer-back:
-    name: vendor-streamer-back
+  vendor-back-viavep:
+    name: vendor-back-viavep
   dbdata:
     driver: local

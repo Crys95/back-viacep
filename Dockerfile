@@ -1,45 +1,38 @@
 FROM php:8.2-fpm-alpine
 
-#Install Laravel framework system requirements
+# Instalar extensões e ferramentas
 RUN apk add --no-cache \
-        oniguruma-dev \
-        postgresql-dev \
-        libxml2-dev \
-        libpng-dev # Add libpng-dev for GD extension
+    oniguruma-dev \
+    postgresql-dev \
+    libxml2-dev \
+    libpng-dev \
+    zip \
+    unzip \
+    curl \
+    git \
+    icu-dev \
+    libzip-dev \
+    php-tokenizer \
+    php-dom
 
-#Install GD extension
-RUN docker-php-ext-install gd
+# Instalar extensões PHP
+RUN docker-php-ext-install pdo pdo_mysql gd zip
 
-RUN docker-php-ext-install mysqli pdo pdo_mysql
-#Install other PHP extensions required by Laravel
+# Instalar Composer
+RUN curl -sS https://getcomposer.org/installer | php && \
+    mv composer.phar /usr/bin/composer
 
-#Install Composer
-RUN php -r "readfile('http://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer
+# Diretório de trabalho
+WORKDIR /app/back-viacep
 
-#Set working directory
-WORKDIR /app/streamer-back
-
-#Copy application files
+# Copiar projeto
 COPY . .
 
-#Set Composer environment variables
+# Variáveis do Composer
 ENV COMPOSER_ALLOW_SUPERUSER=1
-ENV COMPOSER_VENDOR_DIR="/app/streamer-back/vendor"
 
-#Install Composer dependencies
-RUN composer install --ignore-platform-reqs
+# Instalar dependências PHP
+RUN composer install --no-interaction --no-scripts --ignore-platform-reqs
 
-#Cache Laravel configuration
-RUN php artisan config:cache
-
-#Cache Laravel routes
-RUN php artisan route:cache
-
-#Cache Laravel views
-RUN php artisan view:cache
-
-#Clear configuration cache
-RUN php artisan config:clear
-
-#Start Laravel application
-CMD php artisan serve --host=0.0.0.0 --port=8000 
+# Comando de inicialização
+CMD php artisan serve --host=0.0.0.0 --port=8000
