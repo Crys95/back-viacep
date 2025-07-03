@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\CepController\CepController;
+use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,5 +15,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['middleware' => 'api'], function () {
-    Route::get('via-cep', [CepController::class, 'ViaCEP']);
+    require_once __DIR__ . '/cep.php';
 });
